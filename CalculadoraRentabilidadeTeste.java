@@ -2,6 +2,7 @@ package tests;
 import org.junit.Assert.*;
 import org.junit.Test;
 
+import app.CalculadoraRentabilidade;
 import static org.junit.Assert.assertEquals;
 
 public class CalculadoraRentabilidadeTeste {

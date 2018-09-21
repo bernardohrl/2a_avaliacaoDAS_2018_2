@@ -1,64 +1,66 @@
 package tests;
+import java.util.Arrays;
+import java.util.Collection;
+
 import org.junit.Assert.*;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameter;
+import org.junit.runners.Parameterized.Parameters;
 import org.junit.Test;
 
 import app.CalculadoraRentabilidade;
 import static org.junit.Assert.assertEquals;
 
+
+@RunWith(Parameterized.class)
 public class CalculadoraRentabilidadeTeste {
+	
+	@Parameter(0)
+	public double dias;
+	@Parameter(1)
+	public double inicial;
+	@Parameter(2)
+	public double txAnual;
+	@Parameter(3)
+	public double aliquota;
+	@Parameter(4)
+	public double rendBruto;
+	@Parameter(5)
+	public double impostoRenda;
+	@Parameter(6)
+	public double rendLiquido;
 
-	double dias1 = 60;
-	double inicial1 = 1000; 
-	double txAnual1 = 8.5;
-	double aliquota1 = 22.5;
 	
-	double dias2 = 120;
-	double inicial2 = 500; 
-	double txAnual2 = 8.0;
-	double aliquota2 = 22.5;
+	@Parameters
+	public static Collection<Object[]> params() {
+		Object[][] values = {{1000,100,7.5,15.0,20.55,3.08,20.5479},
+							 {60,1000,8.5,22.5,13.97,3.14,1.3972},
+							 {120,500,8.5,22.5,13.97,3.14,2.7945}};
+		
+		return Arrays.asList(values);
+	}
 	
 
 	
 	@Test
-	public void testRendimentoBruto1() {
-		double rendBruto = CalculadoraRentabilidade.rendimentoBruto(dias1, inicial1, txAnual1, aliquota1);
+	public void testRendimentoBruto() {
+		double recived = CalculadoraRentabilidade.rendimentoBruto(dias, inicial, txAnual, aliquota);
 		
-		assertEquals(rendBruto, 13.97, 0.1);
+		assertEquals(recived, rendBruto, 0.1);
 	}
 	
 	@Test
-	public void testImpostoRenda1() {
-		double rendBruto = CalculadoraRentabilidade.impostoRenda(dias1, inicial1, txAnual1, aliquota1);
+	public void testImpostoRenda() {
+		double recived = CalculadoraRentabilidade.impostoRenda(dias, inicial, txAnual, aliquota);
 		
-		assertEquals(rendBruto, 3.14, 0.1);
+		assertEquals(recived, impostoRenda, 0.1);
 	}
 	
 	@Test
-	public void testRendimentoLiquido1() {
-		double rendBruto = CalculadoraRentabilidade.rendimentoLiquido(dias1, inicial1, txAnual1, aliquota1);
+	public void testRendimentoLiquido() {
+		double recived = CalculadoraRentabilidade.rendimentoLiquido(dias, inicial, txAnual, aliquota);
 		
-		assertEquals(rendBruto, 1.3972, 0.1);
-	}
-	
-	
-	@Test
-	public void testRendimentoBruto2() {
-		double rendBruto = CalculadoraRentabilidade.rendimentoBruto(dias2, inicial2, txAnual2, aliquota2);
-		
-		assertEquals(rendBruto, 13.15, 0.1);
-	}
-	
-	@Test
-	public void testImpostoRenda2() {
-		double rendBruto = CalculadoraRentabilidade.impostoRenda(dias2, inicial2, txAnual2, aliquota2);
-		
-		assertEquals(rendBruto, 2.96, 0.1);
-	}
-	
-	@Test
-	public void testRendimentoLiquido2() {
-		double rendBruto = CalculadoraRentabilidade.rendimentoLiquido(dias2, inicial2, txAnual2, aliquota2);
-		
-		assertEquals(rendBruto, 2.6301, 0.01);
+		assertEquals(recived, rendLiquido, 0.1);
 	}
 }

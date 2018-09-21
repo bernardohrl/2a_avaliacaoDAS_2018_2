@@ -7,29 +7,58 @@ import static org.junit.Assert.assertEquals;
 
 public class CalculadoraRentabilidadeTeste {
 
-	int dias = 60;
-	double inicial = 10000; 
-	double txAnual = 8.5;
-	double aliquota = 22.5;
+	int dias1 = 60;
+	double inicial1 = 10000; 
+	double txAnual1 = 8.5;
+	double aliquota1 = 22.5;
+	
+	int dias2 = 120;
+	double inicial2 = 500; 
+	double txAnual2 = 8.0;
+	double aliquota2 = 22.5;
+	
+
 	
 	@Test
-	public void testRendimentoBruto() {
-		double rendBruto = CalculadoraRentabilidade.rendimentoBruto(dias, inicial, txAnual, aliquota);
+	public void testRendimentoBruto1() {
+		double rendBruto = CalculadoraRentabilidade.rendimentoBruto(dias1, inicial1, txAnual1, aliquota1);
 		
 		assertEquals(rendBruto, 13.97, 0.1);
 	}
 	
 	@Test
-	public void testImpostoRenda() {
-		double rendBruto = CalculadoraRentabilidade.impostoRenda(dias, inicial, txAnual, aliquota);
+	public void testImpostoRenda1() {
+		double rendBruto = CalculadoraRentabilidade.impostoRenda(dias1, inicial1, txAnual1, aliquota1);
 		
 		assertEquals(rendBruto, 3.14, 0.1);
 	}
 	
 	@Test
-	public void testRendimentoLiquido() {
-		double rendBruto = CalculadoraRentabilidade.rendimentoLiquido(dias, inicial, txAnual, aliquota);
+	public void testRendimentoLiquido1() {
+		double rendBruto = CalculadoraRentabilidade.rendimentoLiquido(dias1, inicial1, txAnual1, aliquota1);
 		
 		assertEquals(rendBruto, 1.0829, 0.1);
+	}
+	
+	
+	@Test
+	public void testRendimentoBruto2() {
+		double rendBruto = CalculadoraRentabilidade.rendimentoBruto(dias2, inicial2, txAnual2, aliquota2);
+		
+		assertEquals(rendBruto, 13.15, 0.1);
+	}
+	
+	@Test
+	public void testImpostoRenda2() {
+		double rendBruto = CalculadoraRentabilidade.impostoRenda(dias2, inicial2, txAnual2, aliquota2);
+		
+		assertEquals(rendBruto, 2.96, 0.1);
+	}
+	
+	@Test
+	public void testRendimentoLiquido2() {
+		double rendBruto = CalculadoraRentabilidade.rendimentoLiquido(dias2, inicial2, txAnual2, aliquota2);
+		
+		assertEquals(rendBruto, 2.0384, 0.01);
 	}
 }
